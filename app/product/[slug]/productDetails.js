@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 import { urlFor } from '../../../Lib/client';
@@ -14,7 +14,17 @@ const ProductDetails = ({ product, products }) => {
     // Variables for the function
     const { image, name, details, price } = product;
     const [index, setIndex] = useState(0);
-    const { decQty, incQty, qty, onAdd} = useStateContext();
+    const { decQty, incQty, qty, onAdd, setShowCart, setQty } = useStateContext();
+
+    useEffect(() => {
+        setQty(1);
+    }, []);
+
+    const handleBuyNow = () => {
+        onAdd(product, qty);
+
+        setShowCart(true);
+    }
 
     return (
         <div>
@@ -63,7 +73,7 @@ const ProductDetails = ({ product, products }) => {
                     </div>
                     <div className='buttons'>
                         <button type='button' className='add-to-cart' onClick={() => onAdd(product, qty)}> Add to Cart </button>
-                        <button type='button' className='buy-now' > Buy Now </button>
+                        <button type='button' className='buy-now' onClick={handleBuyNow} > Buy Now </button>
                     </div>
                 </div>
             </div>
