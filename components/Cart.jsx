@@ -32,12 +32,12 @@ const Cart = () => {
 
     toast.loading('Redirecting...');
 
-    stripe.redirectToCheckout({ sessionId: data.id });
-    // if (data.url) {
-    //   window.location.assign(data.url);
-    // } else {
-    //   console.error("No redirect URL found in response");
-    // }
+    // stripe.redirectToCheckout({ sessionId: data.id });
+    if (data.url) {
+      window.location.assign(data.url);
+    } else {
+      console.error("No redirect URL found in response");
+    }
   }
 
   return (
